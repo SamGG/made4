@@ -206,6 +206,13 @@ function(dudi.bga, supdata,supvec=NULL, assign=TRUE, ...){
           # Seems to work 4th Nov 2004
             cc = levels(dudi.bga$fac)[closest.cent$closest.class]
             pc = levels(dudi.bga$fac)[thres.res]
+            # keep factor type
+            # cc = factor(closest.cent$closest.class, labels = levels(dudi.bga$fac))
+            # pc =factor(thres.res, labels = levels(dudi.bga$fac))
+            cc <- as.factor(closest.cent$closest.class)
+            levels(cc) <- levels(dudi.bga$fac)
+            pc <- as.factor(thres.res)
+            levels(pc) <- levels(dudi.bga$fac)
             out <- cbind(projected = suppl.res, closest.centre = cc,predicted = pc)
 
         }
@@ -219,7 +226,7 @@ function(dudi.bga, supdata,supvec=NULL, assign=TRUE, ...){
 	}
 
 
-plot.suppl<-function(x, dudi.bga, axis1=1, axis2=2, supvec=sup$true.class, supvec.pred= sup$predicted, ...){ 
+plot.suppl<-function(x, dudi.bga, axis1=1, axis2=2, supvec=x$true.class, supvec.pred= x$predicted, ...){ 
          par(mfrow=c(2,2))
          sup=x
          plotarrays(dudi.bga, sub="BGA of training data",  axis1=axis1, axis2=axis2, graph="simple",...)
