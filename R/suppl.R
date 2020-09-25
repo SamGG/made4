@@ -209,10 +209,9 @@ function(dudi.bga, supdata,supvec=NULL, assign=TRUE, ...){
             # keep factor type
             # cc = factor(closest.cent$closest.class, labels = levels(dudi.bga$fac))
             # pc =factor(thres.res, labels = levels(dudi.bga$fac))
-            cc <- as.factor(closest.cent$closest.class)
-            levels(cc) <- levels(dudi.bga$fac)
-            pc <- as.factor(thres.res)
-            levels(pc) <- levels(dudi.bga$fac)
+            cc <- pc <- factor(seq(levels(dudi.bga$fac)), labels = levels(dudi.bga$fac))
+            cc <- cc[closest.cent$closest.class]
+            pc <- pc[thres.res]
             out <- cbind(projected = suppl.res, closest.centre = cc,predicted = pc)
 
         }
